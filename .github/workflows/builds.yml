@@ -1,0 +1,37 @@
+name: Build Native Image
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'
+          distribution: 'graalvm-community'
+          components: 'native-image'
+          cache: 'maven' # 自动缓存依赖
+
+      - name: Debug - Show GraalVM version
+        run: |
+          java -version 
+          native-image --version 
+
+      - name: Build Native Image
+        run: |
+          mvn -Pnative clean package 
+          ls -lh target/ # 显示生成文件信息 
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: native-executable
+          path: target/* # 上传所有构建产物
