@@ -7,6 +7,6 @@ RUN native-image -jar app.jar  --static --libc=glibc -H:Name=app -O1 --no-fallba
 # 运行阶段：使用Alpine精简镜像
 FROM alpine:3.19
 WORKDIR /app
-COPY /app/app /app/executable
+COPY --from=builder /app/app /app/executable
 RUN chmod +x /app/executable
 ENTRYPOINT ["/app/executable"]
