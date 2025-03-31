@@ -28,10 +28,4 @@ jobs:
       - name: Build Native Image
         run: |
           mvn -Pnative clean package 
-          ls -lh target/ # 显示生成文件信息 
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: native-executable
-          path: target/* # 上传所有构建产物
+          ls -lh target/ # 显示生成文件信息
