@@ -47,6 +47,15 @@
 			<plugin>
 				<groupId>org.graalvm.buildtools</groupId>
 				<artifactId>native-maven-plugin</artifactId>
+				<configuration>
+					<buildArgs>
+						<arg>--static</arg>
+						<arg>--libc=glibc</arg>
+						<!-- 附加优化参数 -->
+						<arg>-O1</arg>
+						<arg>-H:+ReportExceptionStackTraces</arg>
+					</buildArgs>
+				</configuration>
 				<executions>
 					<execution>
 						<id>build-native</id>
