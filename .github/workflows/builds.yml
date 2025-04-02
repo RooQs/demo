@@ -23,9 +23,3 @@ jobs:
         run: mvn -B clean package
         env:
           MAVEN_OPTS: -Dhttps.protocols=TLSv1.2
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: application-jar
-          path: target/*.jar
