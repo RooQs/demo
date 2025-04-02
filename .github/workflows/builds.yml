@@ -23,3 +23,8 @@ jobs:
         run: mvn -B clean package
         env:
           MAVEN_OPTS: -Dhttps.protocols=TLSv1.2
+
+      - name: Attest
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: '${{ github.workspace }}/target'
