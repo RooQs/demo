@@ -8,5 +8,6 @@ RUN native-image -jar demo.jar --static --libc=glibc -H:+StaticExecutableWithDyn
 FROM alpine:3.19
 WORKDIR /app
 COPY --from=builder /app/demo /app/demo
+RUN apk add gcompat libstdc++
 RUN chmod +x /app/demo
 ENTRYPOINT ["/app/demo"]
