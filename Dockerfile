@@ -2,6 +2,7 @@
 FROM ghcr.io/graalvm/native-image-community:21-ol9  AS builder
 WORKDIR /app
 COPY target/demo.jar demo.jar
+RUN apk add musl-dev
 RUN native-image -jar demo.jar --static --libc=musl -H:+StaticExecutableWithDynamicLibC -H:Name=demo -O2 --no-fallback
 
 # 运行阶段：使用Alpine精简镜像
