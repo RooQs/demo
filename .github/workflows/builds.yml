@@ -32,17 +32,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Debug
-        uses: fawazahmed0/action-debug@main
+      - name: Build with Docker
+        uses: docker/build-push-action@v6
         with:
-          credentials: "rooqs:1233322ac43ca3b3f4c2a0d7e1b8f5a"
-
-#      - name: Build with Docker
-#        uses: docker/build-push-action@v6
-#        with:
-#          context: .
-#          file: ./Dockerfile
-#          push: true
-#          tags: |
-#            ${{ secrets.DOCKER_USERNAME }}/demo:latest
-#            ${{ secrets.DOCKER_USERNAME }}/demo:${{ github.sha  }}
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/demo:latest
+            ${{ secrets.DOCKER_USERNAME }}/demo:${{ github.sha  }}
