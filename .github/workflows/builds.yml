@@ -19,6 +19,6 @@ jobs:
           java-version: '21'
 
       - name: Build with Maven
-        run: mvn -B clean package | ls target
+        run: mvn -B clean package && ls -l target/
         env:
           MAVEN_OPTS: -Dhttps.protocols=TLSv1.2
